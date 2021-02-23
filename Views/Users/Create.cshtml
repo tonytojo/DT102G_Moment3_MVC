@@ -2,8 +2,7 @@
 
 @{
     ViewData["Title"] = "Create";
-    string now = DateTime.Now.ToString();
-    now = now.Remove(10, 1).Insert(10, "T");
+    string now = DateTime.Now.ToString().Remove(10, 1).Insert(10, "T");
 }
 
 <h1>Create</h1>

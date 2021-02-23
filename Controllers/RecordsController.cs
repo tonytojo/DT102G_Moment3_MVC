@@ -28,6 +28,8 @@ namespace DT102G_ASP_NET_Moment3.Controllers
                 ? _context.Records.Include(r => r.Artist)
                 : _context.Records.Include(r => r.Artist).Where(x => x.Name == search);
 
+            ViewData["search"] = search;
+
             return View(await artistContext.ToListAsync());
         }
 
@@ -143,6 +145,17 @@ namespace DT102G_ASP_NET_Moment3.Controllers
                 return NotFound();
             }
 
+            //Make a check if this record id has been hired by a user.
+            //If passed id exist as RecordId in table User that means 
+            //a user has rended this record. So if we try to remove that record
+            //We wil run into reference integrity violation
+            var item = _context.User.Include(x=>x.Record).Where(x => x.RecordId == id);
+            if (item.Count() == 1)
+            {
+                ViewData["occupied"] = true;
+                //ViewData["occupied"] = item.Where(x =>x.Record.Name);
+            }
+ 
             return View(record);
         }
 

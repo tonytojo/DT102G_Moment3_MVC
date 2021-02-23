@@ -19,6 +19,6 @@ namespace DT102G_ASP_NET_Moment3.Models
         //Navigation reference, Foreign key
         //We relation one-one bwtween user and Record(CD)
         public virtual Record Record { get; set; }
-        public int? RecordId { get; set; }
+        public int RecordId { get; set; }
     }
 }

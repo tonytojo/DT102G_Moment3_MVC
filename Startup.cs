@@ -25,6 +25,7 @@ namespace DT102G_ASP_NET_Moment3
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddControllersWithViews();
+
             services.AddDbContext<ArtistContext>(options =>
             options.UseSqlServer(Configuration.GetConnectionString("DefaultDbString")));
         }
