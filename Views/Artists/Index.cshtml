@@ -35,7 +35,7 @@
         </tr>
     </thead>
     <tbody>
-@foreach (var item in Model) {
+@foreach (var item in Model) {  @*Loop through all artists *@
         <tr>
             <td>
                 @Html.DisplayFor(modelItem => item.Name)
@@ -57,21 +57,23 @@
             </td>
 
             @*Here I show all Records(CDs) that belong to an Artist*@
-            <td>
-                @{
-                    List<SelectListItem> cdlist = new List<SelectListItem>();
-                }
+        <td>
+            @{
+                List<SelectListItem> cdlist = new List<SelectListItem>();
+            }
 
-                @foreach (var cd in item.Records)
-                {
-                    cdlist.Add(new SelectListItem() { Text = cd.Name, Value = "1" });
-                }
+            @* Loop through all records for this artist and add the to collection *@
+            @foreach (var cd in item.Records)
+            {
+                cdlist.Add(new SelectListItem() { Text = cd.Name, Value = "1" });
+            }
 
-                @if (cdlist.Count > 0)
-                {
-                    <select autofocus asp-items="@cdlist" class="form-control"></select>
-                }
-            </td>
+            @* If we have some Records display them in a dropdownlist *@
+            @if (cdlist.Count > 0)
+            {
+                <select autofocus asp-items="@cdlist" class="form-control"></select>
+            }
+        </td>
             <td>
                 <a asp-action="Edit" asp-route-id="@item.ArtistId">Edit</a> |
                 <a asp-action="Details" asp-route-id="@item.ArtistId">Details</a> |
